@@ -1,5 +1,6 @@
 import './App.css';
-import { BigCalender } from './component/module';
+import { BigCalender, FullCalender } from './component/module';
+import events from './component/module/FullCalender/events';
 
 function App() {
   return (
@@ -66,6 +67,19 @@ function App() {
             category: 'time',
           },
         ]}
+      />
+      <FullCalender
+        height="auto"
+        initialView="dayGridMonth"
+        header={{
+          start: 'today',
+          center: 'title',
+          end: 'prev,next',
+        }}
+        bgColor="green"
+        textColor="white"
+        schedules={events}
+        fixedWeekCount={false}
       />
     </div>
   );

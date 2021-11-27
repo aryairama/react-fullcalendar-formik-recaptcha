@@ -22,7 +22,6 @@ const BigCalendar = ({ schedules = [], bgColor, textColor, option, ...props }) =
     });
     if (calendar) {
       calendar.clear();
-      console.log(calendar.createSchedules);
       calendar.createSchedules(schedules, false);
       calendar.render();
     }
