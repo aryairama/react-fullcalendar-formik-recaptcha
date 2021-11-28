@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import ExampleCalendar from './calendar/ExampleCalendar';
 import ExampleFormikHook from './formik/ExampleFormikHook';
 import ExampleFormikComponent from './formik/ExampleFormikComponent';
+import ExampleFormikCustomComponent from './formik/ExampleFormikCustomComponent';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route path="/" element={<ExampleCalendar />} />
       <Route path="/formik-hook" element={<ExampleFormikHook />} />
       <Route path="/formik-component" element={<ExampleFormikComponent />} />
+      <Route path="/formik-custom-component" element={<ExampleFormikCustomComponent />} />
     </Routes>
   );
 }
