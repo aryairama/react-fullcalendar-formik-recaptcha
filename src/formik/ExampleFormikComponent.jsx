@@ -1,6 +1,6 @@
 import React from 'react';
 import * as yup from 'yup';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage, Field, Form } from 'formik';
 
 const ExampleFormikComponent = () => {
   const initialValues = {
@@ -25,27 +25,32 @@ const ExampleFormikComponent = () => {
       onSubmit={(value) => console.log(value)}
     >
       {(formik) => (
-        <form onSubmit={formik.handleSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
           <label htmlFor="">Email</label>
-          <input
+          <Field name="email" type="email" placeholder="email" />
+          {/* <input
             type="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-          />
+          /> */}
           <ErrorMessage component="div" name="email" />
           <label htmlFor="">password</label>
-          <input
+          <Field name="password" type="password" placeholder="password" />
+          {/* <input
             type="password"
             name="password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-          />
+          /> */}
           <ErrorMessage component="div" name="password" />
           <button type="submit">submit</button>
-        </form>
+          <button type="reset" onClick={() => formik.resetForm()}>
+            reset
+          </button>
+        </Form>
       )}
     </Formik>
   );
