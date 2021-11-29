@@ -42,10 +42,30 @@ const ReCaptcha = () => {
       validationSchema={validationSchema}
       validateOnBlur={true}
       validateOnChange={true}
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         if (recaptchaRef.current.getValue()) {
-          dispatch({ type: 'HIDE' });
-          console.log(values);
+          try {
+            const verifToken = await (
+              await fetch(`http://localhost:4000/recaptcha`, {
+                method: 'POST',
+                body: JSON.stringify({
+                  token: recaptchaRef.current.getValue(),
+                }),
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+              })
+            ).json();
+            if (verifToken.success) {
+              console.log(values);
+              dispatch({ type: 'HIDE' });
+            } else {
+              dispatch({ type: 'SHOW' });
+            }
+          } catch (error) {
+            dispatch({ type: 'SHOW' });
+          }
           recaptchaRef.current.reset();
         } else {
           dispatch({ type: 'SHOW' });
@@ -72,7 +92,7 @@ const ReCaptcha = () => {
           <div className={style['recaptcha-form-recaptcha']}>
             <RECAPTCHA
               ref={recaptchaRef}
-              sitekey="6LdgO2UdAAAAABuMzkVp30oHPKZbSofUbiiwKUF9"
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
               onChange={handlerReCaptcha}
             />
           </div>
