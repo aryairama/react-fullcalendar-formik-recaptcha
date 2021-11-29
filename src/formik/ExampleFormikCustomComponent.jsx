@@ -38,7 +38,9 @@ const ExampleFormikCustomComponent = () => {
             <option value="user">User</option>
           </Select>
           <Checkbox name="human">Are you human?</Checkbox>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={!(formik.isValid && formik.dirty)}>
+            Submit
+          </button>
           <button type="reset" onClick={() => formik.resetForm()}>
             Reset
           </button>

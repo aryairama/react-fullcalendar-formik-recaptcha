@@ -1,0 +1,43 @@
+@mixin button ($px : 0px, $py : 0px, $my: 0px, $mx:0px, $radius : 0px, $color : 'black', $backgroundColor : 'white') {
+    border-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: $py $px $py $px;
+    margin: $my $mx $my $mx;
+    border-radius: $radius;
+    color: $color;
+    background-color: $backgroundColor
+}
+
+@mixin breakpoint ($point) {
+    @if $point=='sm' {
+        @media (min-width:640px) {
+            @content;
+        }
+    }
+
+    @else if $point=='md' {
+        @media (min-width:768px) {
+            @content;
+        }
+    }
+
+    @else if $point=='lg' {
+        @media (min-width:1024px) {
+            @content;
+        }
+    }
+
+    @else if $point=='xl' {
+        @media (min-width:1280px) {
+            @content;
+        }
+    }
+
+    @else if $point=='2xl' {
+        @media (min-width:1536px) {
+            @content;
+        }
+    }
+}
