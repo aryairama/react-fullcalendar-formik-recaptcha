@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import style from './ReCaptcha.module.scss';
 import { Input } from '../component/base';
-import RECAPTCHA from 'react-google-recaptcha';
-import { useRef, useReducer } from 'react';
+import { useGoogleReCaptcha, GoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useReducer } from 'react';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -16,9 +17,9 @@ const reducer = (state, action) => {
   }
 };
 
-const ReCaptcha = () => {
+const ReCaptchaV3 = (props) => {
   const [captcha, dispatch] = useReducer(reducer, { human: false, showVerifRecaptcha: false });
-  const recaptchaRef = useRef(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const initialValues = {
     email: '',
     password: '',
@@ -31,9 +32,31 @@ const ReCaptcha = () => {
       .min(8, 'password minimal 8 huruf')
       .max(255, 'password maximal 255 huruf'),
   });
-  const handlerReCaptcha = () => {
-    if (recaptchaRef.current.getValue()) {
-      dispatch({ type: 'HIDE' });
+  const handlerSubmit = async (values, action) => {
+    try {
+      if (executeRecaptcha) {
+        const token = await executeRecaptcha('submitForm');
+        const verifToken = await (
+          await fetch(`http://localhost:4000/recaptcha`, {
+            method: 'POST',
+            body: JSON.stringify({
+              token: token,
+            }),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          })
+        ).json();
+        if (verifToken.success) {
+          action.resetForm();
+          dispatch({ type: 'HIDE' });
+        } else {
+          dispatch({ type: 'SHOW' });
+        }
+      }
+    } catch (error) {
+      dispatch({ type: 'SHOW' });
     }
   };
   return (
@@ -42,35 +65,7 @@ const ReCaptcha = () => {
       validationSchema={validationSchema}
       validateOnBlur={true}
       validateOnChange={true}
-      onSubmit={async (values) => {
-        if (recaptchaRef.current.getValue()) {
-          try {
-            const verifToken = await (
-              await fetch(`http://localhost:4000/recaptcha`, {
-                method: 'POST',
-                body: JSON.stringify({
-                  token: recaptchaRef.current.getValue(),
-                }),
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                },
-              })
-            ).json();
-            if (verifToken.success) {
-              console.log(values);
-              dispatch({ type: 'HIDE' });
-            } else {
-              dispatch({ type: 'SHOW' });
-            }
-          } catch (error) {
-            dispatch({ type: 'SHOW' });
-          }
-          recaptchaRef.current.reset();
-        } else {
-          dispatch({ type: 'SHOW' });
-        }
-      }}
+      onSubmit={handlerSubmit}
     >
       {(formik) => (
         <Form className={style['recaptcha-form']} onSubmit={formik.handleSubmit}>
@@ -89,18 +84,10 @@ const ReCaptcha = () => {
             type="password"
             placeholder="Password"
           />
-          <div className={style['recaptcha-form-recaptcha']}>
-            <RECAPTCHA
-              ref={recaptchaRef}
-              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY_V2}
-              onChange={handlerReCaptcha}
-            />
-          </div>
           {captcha.human === false && captcha.showVerifRecaptcha && (
-            <div className={style['recaptcha-form-invalid-recaptcha']}>
-              silahkan verifikasi terlebih dahulu, jika anda bukan robot
-            </div>
+            <div className={style['recaptcha-form-invalid-recaptcha']}>anda teridentifikasi sebagai robot.</div>
           )}
+          <GoogleReCaptcha />
           <div className={style['recaptcha-form-container-button']}>
             <button disabled={!(formik.isValid && formik.dirty)} className={style['button-submit']} type="submit">
               Submit
@@ -112,4 +99,4 @@ const ReCaptcha = () => {
   );
 };
 
-export default ReCaptcha;
+export default ReCaptchaV3;
