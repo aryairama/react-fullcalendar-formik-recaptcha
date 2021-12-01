@@ -10,6 +10,7 @@ import GoogleReCaptchaRoute from './component/middleware/GoogleReCaptchaRoute';
 import ReactTableBasic from './reactTable/ReactTableBasic';
 import ReactTableSorting from './reactTable/ReactTableSorting';
 import ReactTableFormating from './reactTable/ReactTableFormating';
+import ReactTableGlobalFilter from './reactTable/ReactTableGlobalFilter';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/react-table-basic" element={<ReactTableBasic />} />
       <Route path="/react-table-sorting" element={<ReactTableSorting />} />
       <Route path="/react-table-formating" element={<ReactTableFormating />} />
+      <Route path="/react-table-global-filter" element={<ReactTableGlobalFilter />} />
     </Routes>
   );
 }
