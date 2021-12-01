@@ -1,0 +1,48 @@
+.table-container {
+    padding: 10px;
+    width: 100%;
+    overflow-y: auto;
+
+    &-table {
+        border-spacing: 0;
+        width: 100%;
+
+        .table-tr {
+            &:nth-child(even) {
+                background-color: #212529;
+            }
+
+            &:nth-child(odd) {
+                background-color: #2c3034;
+            }
+
+            &:last-child {
+                .table-body {
+                    border-bottom: 0;
+                }
+            }
+        }
+
+        .table-header,
+        .table-body,
+        .table-footer {
+            width: 1%;
+            white-space: nowrap;
+            margin: 0px;
+            padding: 0.5rem;
+            color: white;
+            border-bottom: 1px solid #303437;
+            border-right: 1px solid #303437;
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        .table-header,
+        .table-footer {
+            background-color: #212529;
+            border-bottom: 1px solid white;
+        }
+    }
+}

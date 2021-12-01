@@ -7,6 +7,8 @@ import ExampleFormikCustomComponent from './formik/ExampleFormikCustomComponent'
 import ReCaptcha from './reCAPTCHA/ReCaptcha';
 import ReCaptchaV3 from './reCAPTCHA/ReCaptchaV3';
 import GoogleReCaptchaRoute from './component/middleware/GoogleReCaptchaRoute';
+import ReactTableBasic from './reactTable/ReactTableBasic';
+import ReactTableSorting from './reactTable/ReactTableSorting';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Route path="/formik-custom-component" element={<ExampleFormikCustomComponent />} />
       <Route path="/recaptcha" element={<ReCaptcha />} />
       <Route path="/recaptcha-v3" element={<GoogleReCaptchaRoute component={ReCaptchaV3} />} />
+      <Route path="/react-table-basic" element={<ReactTableBasic />} />
+      <Route path="/react-table-sorting" element={<ReactTableSorting />} />
     </Routes>
   );
 }
