@@ -9,6 +9,7 @@ import ReCaptchaV3 from './reCAPTCHA/ReCaptchaV3';
 import GoogleReCaptchaRoute from './component/middleware/GoogleReCaptchaRoute';
 import ReactTableBasic from './reactTable/ReactTableBasic';
 import ReactTableSorting from './reactTable/ReactTableSorting';
+import ReactTableFormating from './reactTable/ReactTableFormating';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/recaptcha-v3" element={<GoogleReCaptchaRoute component={ReCaptchaV3} />} />
       <Route path="/react-table-basic" element={<ReactTableBasic />} />
       <Route path="/react-table-sorting" element={<ReactTableSorting />} />
+      <Route path="/react-table-formating" element={<ReactTableFormating />} />
     </Routes>
   );
 }
