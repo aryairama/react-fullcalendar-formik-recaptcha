@@ -1,9 +1,11 @@
+@use '../scss/mixin'as *;
+
 .table-container {
     padding: 10px;
     width: 100%;
     overflow-y: auto;
 
-    &-table {
+    & &-table {
         border-spacing: 0;
         width: 100%;
 
@@ -44,6 +46,16 @@
             background-color: #212529;
             border-bottom: 1px solid white;
         }
+    }
+
+}
+
+.pagination-container {
+    display: flex;
+    width: 100%;
+
+    .button-pagination {
+        @include button(20px, 10px, 15px, 10px, 10px, white, #303437);
     }
 }
 

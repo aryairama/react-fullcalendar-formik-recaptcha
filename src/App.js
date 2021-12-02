@@ -12,6 +12,7 @@ import ReactTableSorting from './reactTable/ReactTableSorting';
 import ReactTableFormating from './reactTable/ReactTableFormating';
 import ReactTableGlobalFilter from './reactTable/ReactTableGlobalFilter';
 import ReactTableGlobalFilterColumnFilter from './reactTable/ReactTableGlobalFilterColumnFilter';
+import ReactTablePagination from './reactTable/ReactTablePagination';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/react-table-formating" element={<ReactTableFormating />} />
       <Route path="/react-table-global-filter" element={<ReactTableGlobalFilter />} />
       <Route path="/react-table-global-filter-column-filter" element={<ReactTableGlobalFilterColumnFilter />} />
+      <Route path="/react-table-pagination" element={<ReactTablePagination />} />
     </Routes>
   );
 }
