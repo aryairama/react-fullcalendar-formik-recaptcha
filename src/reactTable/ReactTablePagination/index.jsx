@@ -23,6 +23,7 @@ const Index = () => {
     gotoPage,
     pageCount,
     pageOptions,
+    setPageSize,
   } = useTable(
     {
       columns,
@@ -33,7 +34,7 @@ const Index = () => {
     useSortBy,
     usePagination
   );
-  const { globalFilter, pageIndex } = state;
+  const { globalFilter, pageIndex, pageSize } = state;
   return (
     <>
       <Input
@@ -96,6 +97,16 @@ const Index = () => {
         <button className={style['button-pagination']} disabled={!canNextPage} onClick={() => gotoPage(pageCount - 1)}>
           {`>>`}
         </button>
+        <select
+          className={style['input-gotopage']}
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
         <Input
           className={style['input-gotopage']}
           validation={false}
