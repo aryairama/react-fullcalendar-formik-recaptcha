@@ -1,6 +1,6 @@
 import MOCKDATA from '../MOCK_DATA.json';
-import { headerColumns as COLUMNS } from './columns';
-import { useTable, useSortBy, useGlobalFilter } from 'react-table';
+import { FilterColumns as COLUMNS } from './columns';
+import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table';
 import { useMemo } from 'react';
 import { Input } from '../../component/base';
 import style from '../ReactTableBasic.module.scss';
@@ -14,17 +14,18 @@ const Index = () => {
         columns,
         data,
       },
+      useFilters,
       useGlobalFilter,
       useSortBy
     );
   const { globalFilter } = state;
-
   return (
     <>
       <Input
         classNameContainer={style['container-input-filter-table']}
         className={style['input-filter-table']}
         value={globalFilter || ''}
+        jos={state}
         onChange={(e) => setGlobalFilter(e.target.value)}
         validation={false}
       />
@@ -34,9 +35,15 @@ const Index = () => {
             {headerGroups.map((headerGroup) => (
               <tr className={style['table-tr']} {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th className={style['table-header']} {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}
-                    <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                  <th className={style['table-header']} {...column.getHeaderProps()}>
+                    <div
+                      {...column.getSortByToggleProps()}
+                      style={{ display: 'flex', justifyContent: 'center', cursor: 'pointer' }}
+                    >
+                      {column.render('Header')}
+                      <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                    </div>
+                    <div>{column.canFilter ? column.render('Filter') : null}</div>
                   </th>
                 ))}
               </tr>
