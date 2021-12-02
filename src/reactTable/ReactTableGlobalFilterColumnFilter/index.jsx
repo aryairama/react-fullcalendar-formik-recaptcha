@@ -25,7 +25,6 @@ const Index = () => {
         classNameContainer={style['container-input-filter-table']}
         className={style['input-filter-table']}
         value={globalFilter || ''}
-        jos={state}
         onChange={(e) => setGlobalFilter(e.target.value)}
         validation={false}
       />
