@@ -57,6 +57,20 @@
     .button-pagination {
         @include button(20px, 10px, 15px, 10px, 10px, white, #303437);
     }
+
+    .input-gotopage {
+        margin-top: 15px;
+        height: 40px;
+        width: 70%;
+
+        @include breakpoint('sm') {
+            width: 20%;
+        }
+
+        @include breakpoint('md') {
+            width: 10%;
+        }
+    }
 }
 
 .container-input-filter-table {

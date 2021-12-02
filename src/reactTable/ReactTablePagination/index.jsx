@@ -20,6 +20,9 @@ const Index = () => {
     previousPage,
     canNextPage,
     canPreviousPage,
+    gotoPage,
+    pageCount,
+    pageOptions,
   } = useTable(
     {
       columns,
@@ -30,7 +33,7 @@ const Index = () => {
     useSortBy,
     usePagination
   );
-  const { globalFilter } = state;
+  const { globalFilter, pageIndex } = state;
   return (
     <>
       <Input
@@ -81,12 +84,28 @@ const Index = () => {
         </table>
       </div>
       <div className={style['pagination-container']}>
+        <button className={style['button-pagination']} disabled={!canPreviousPage} onClick={() => gotoPage(0)}>
+          {`<<`}
+        </button>
         <button className={style['button-pagination']} disabled={!canPreviousPage} onClick={previousPage}>
           Previous
         </button>
         <button className={style['button-pagination']} disabled={!canNextPage} onClick={nextPage}>
           Next
         </button>
+        <button className={style['button-pagination']} disabled={!canNextPage} onClick={() => gotoPage(pageCount - 1)}>
+          {`>>`}
+        </button>
+        <Input
+          className={style['input-gotopage']}
+          validation={false}
+          value={pageIndex + 1}
+          type="number"
+          onChange={(e) => {
+            const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0;
+            gotoPage(pageNumber);
+          }}
+        />
       </div>
     </>
   );
