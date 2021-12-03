@@ -52,25 +52,63 @@
 
 .pagination-container {
     display: flex;
+    flex-wrap: wrap-reverse;
     width: 100%;
+    justify-content: flex-end;
 
     .button-pagination {
         @include button(20px, 10px, 15px, 10px, 10px, white, #303437);
     }
 
-    .input-gotopage {
-        margin-top: 15px;
-        height: 40px;
-        width: 70%;
+    .input-container {
+        width: 20%;
+        margin-right: 5px;
+        margin-left: 5px;
 
         @include breakpoint('sm') {
-            width: 20%;
+            margin-top: 15px;
+            width: 10%;
+        }
+
+        .input-gotopage {
+            height: 40px;
+            width: 100%;
+        }
+
+        .select-page-size {
+            margin-left: 5px;
+            margin-right: 5px;
+            padding: 0px;
+            width: 100%;
+            height: 40px;
+        }
+    }
+
+    .pagination-component {
+        width: 100%;
+        justify-content: end;
+
+        @include breakpoint('sm') {
+            width: 70%;
         }
 
         @include breakpoint('md') {
-            width: 10%;
+            width: 58%;
+        }
+
+        @include breakpoint('lg') {
+            width: 43%;
+        }
+
+        @include breakpoint('xl') {
+            width: 33%;
+        }
+
+        @include breakpoint('2xl') {
+            width: 30%;
         }
     }
+
 }
 
 .container-input-filter-table {

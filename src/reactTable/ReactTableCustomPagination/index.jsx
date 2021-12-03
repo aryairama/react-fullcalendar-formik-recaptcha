@@ -2,7 +2,7 @@ import MOCKDATA from '../MOCK_DATA.json';
 import { FilterColumns as COLUMNS } from './columns';
 import { useTable, useSortBy, useGlobalFilter, useFilters, usePagination } from 'react-table';
 import { useMemo } from 'react';
-import { Input } from '../../component/base';
+import { Input, Pagination } from '../../component/base';
 import style from '../ReactTableBasic.module.scss';
 
 const Index = () => {
@@ -12,16 +12,17 @@ const Index = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    rows,
     page,
     prepareRow,
     state,
     setGlobalFilter,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
+    // nextPage,
+    // previousPage,
+    // canNextPage,
+    // canPreviousPage,
     gotoPage,
-    pageCount,
+    // pageCount,
     // pageOptions,
     setPageSize,
   } = useTable(
@@ -85,7 +86,7 @@ const Index = () => {
         </table>
       </div>
       <div className={style['pagination-container']}>
-        <button className={style['button-pagination']} disabled={!canPreviousPage} onClick={() => gotoPage(0)}>
+        {/* <button className={style['button-pagination']} disabled={!canPreviousPage} onClick={() => gotoPage(0)}>
           {`<<`}
         </button>
         <button className={style['button-pagination']} disabled={!canPreviousPage} onClick={previousPage}>
@@ -96,18 +97,21 @@ const Index = () => {
         </button>
         <button className={style['button-pagination']} disabled={!canNextPage} onClick={() => gotoPage(pageCount - 1)}>
           {`>>`}
-        </button>
-        <select
-          className={style['input-gotopage']}
-          value={pageSize}
-          onChange={(e) => setPageSize(Number(e.target.value))}
-        >
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
+        </button> */}
+        <div className={style['input-container']}>
+          <select
+            className={style['select-page-size']}
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+          >
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
         <Input
+          classNameContainer={style['input-container']}
           className={style['input-gotopage']}
           validation={false}
           value={pageIndex + 1}
@@ -116,6 +120,14 @@ const Index = () => {
             const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0;
             gotoPage(pageNumber);
           }}
+        />
+        <Pagination
+          className={style['pagination-component']}
+          totalData={rows.length}
+          pageSize={pageSize}
+          currentPage={pageIndex + 1}
+          numberOfButtons={5}
+          setPage={gotoPage}
         />
       </div>
     </>
