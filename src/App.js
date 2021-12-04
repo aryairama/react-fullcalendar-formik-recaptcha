@@ -14,6 +14,7 @@ import ReactTableGlobalFilter from './reactTable/ReactTableGlobalFilter';
 import ReactTableGlobalFilterColumnFilter from './reactTable/ReactTableGlobalFilterColumnFilter';
 import ReactTablePagination from './reactTable/ReactTablePagination';
 import ReactTableCustomPagination from './reactTable/ReactTableCustomPagination';
+import ReactTableRowSelect from './reactTable/ReactTableRowSelect';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Route path="/react-table-global-filter-column-filter" element={<ReactTableGlobalFilterColumnFilter />} />
       <Route path="/react-table-pagination" element={<ReactTablePagination />} />
       <Route path="/react-table-custom-pagination" element={<ReactTableCustomPagination />} />
+      <Route path="/react-table-rowselect" element={<ReactTableRowSelect />} />
     </Routes>
   );
 }
