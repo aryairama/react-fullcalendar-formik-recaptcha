@@ -11,6 +11,7 @@ const ReactTableCheckbox = React.forwardRef(({ indeterminate, ...rest }, ref) =>
   return (
     <div style={{ textAlign: 'center' }}>
       <input type="checkbox" ref={resolvedRef} {...rest} />
+      <label htmlFor={rest.id}>{rest.label}</label>
     </div>
   );
 });
