@@ -12,7 +12,7 @@ const Index = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    // rows,
     page,
     prepareRow,
     state,
@@ -25,7 +25,7 @@ const Index = () => {
     // pageCount,
     // pageOptions,
     setPageSize,
-    selectedFlatRows,
+    // selectedFlatRows,
     allColumns,
     getToggleHideAllColumnsProps,
   } = useTable(
@@ -40,11 +40,15 @@ const Index = () => {
             desc: true,
           },
         ],
+        pageSize: 5,
       },
       manualPagination: true,
       manualGlobalFilter: true,
       manualSortBy: true,
       disableMultiSort: true,
+      autoResetPage: false,
+      autoResetSelectedRows: false,
+      getRowId: (row) => row.product_id,
       pageCount: products?.pagination?.pages || 0,
     },
     // useFilters,
@@ -65,7 +69,7 @@ const Index = () => {
       });
     }
   );
-  const { globalFilter, pageIndex, pageSize, sortBy } = state;
+  const { globalFilter, pageIndex, pageSize, sortBy, selectedRowIds } = state;
   useEffect(async () => {
     const { data, pagination } = await (
       await fetch(
@@ -143,6 +147,7 @@ const Index = () => {
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
           >
+            <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -162,7 +167,7 @@ const Index = () => {
         />
         <Pagination
           className={style['pagination-component']}
-          totalData={rows.length}
+          totalData={products?.pagination?.countData || 0}
           pageSize={pageSize}
           currentPage={pageIndex + 1}
           numberOfButtons={5}
@@ -170,7 +175,7 @@ const Index = () => {
         />
       </div>
       <pre>
-        <code>{JSON.stringify({ selectedRows: selectedFlatRows.map((rows) => rows.original) }, null, 2)}</code>
+        <code>{JSON.stringify({ selectedRows: selectedRowIds }, null, 2)}</code>
       </pre>
     </>
   );
