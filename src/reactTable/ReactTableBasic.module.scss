@@ -1,6 +1,7 @@
 @use '../scss/mixin'as *;
 
 .table-container {
+    box-sizing: border-box;
     padding: 10px;
     width: 100%;
     overflow-y: auto;
