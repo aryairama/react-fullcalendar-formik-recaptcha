@@ -21,6 +21,7 @@ const ReactTablePaginationControlled = lazy(() => import('./reactTable/ReactTabl
 const ReactTablePaginationControlledExpandedColumn = lazy(() =>
   import('./reactTable/ReactTablePaginationControlledExpandedColumn')
 );
+const ImgViewer = lazy(() => import('./imgViewer'));
 
 function App() {
   return (
@@ -42,7 +43,25 @@ function App() {
         <Route path="/react-table-rowselect" element={<ReactTableRowSelect />} />
         <Route path="/react-table-column-hiding" element={<ReactTableColumnHiding />} />
         <Route path="/react-table-pagination-controlled" element={<ReactTablePaginationControlled />} />
-        <Route path="/react-table-pagination-controlled-expanded-column" element={<ReactTablePaginationControlledExpandedColumn />} />
+        <Route
+          path="/react-table-pagination-controlled-expanded-column"
+          element={<ReactTablePaginationControlledExpandedColumn />}
+        />
+        <Route
+          path="/imgviewer"
+          element={
+            <ImgViewer
+              images={[
+                {
+                  url: 'https://api-tokoku.arya-irama-wahono.xyz/public/img/products/eb02abc3-af9f-408e-a21f-fa6b3f2dfbc2.jpg',
+                },
+                {
+                  url: 'https://api-tokoku.arya-irama-wahono.xyz/public/img/products/d764f15a-36be-487c-a1c0-392a8b6f72b8.jpg',
+                },
+              ]}
+            />
+          }
+        />
       </Routes>
     </Suspense>
   );
