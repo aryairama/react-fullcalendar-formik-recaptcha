@@ -62,13 +62,10 @@ export default class Lightbox extends React.Component {
   navigateImage = (direction, e) => {
     this.stopSideEffect(e);
     let current = 0;
-    switch (direction) {
-      case 'next':
-        current = this.state.current + 1;
-        break;
-      case 'prev':
-        current = this.state.current - 1;
-        break;
+    if (direction === 'next') {
+      current = this.state.current + 1;
+    } else if (direction === 'prev') {
+      current = this.state.current - 1;
     }
     if (current >= this.props.images.length) current = 0;
     else if (current < 0) current = this.props.images.length - 1;
@@ -97,29 +94,22 @@ export default class Lightbox extends React.Component {
   endMove = (e) => this.setState({ moving: false });
   applyZoom = (type) => {
     let { zoomStep = DEFAULT_ZOOM_STEP } = this.props;
-    switch (type) {
-      case 'in':
-        this.setState({ zoom: this.state.zoom + zoomStep });
-        break;
-      case 'out':
-        let newZoom = this.state.zoom - zoomStep;
-        if (newZoom < 1) break;
-        else if (newZoom === 1) this.setState({ x: 0, y: 0, zoom: 1 });
-        else this.setState({ zoom: newZoom });
-        break;
-      case 'reset':
-        this.resetZoom();
-        break;
+    if (type === 'in') {
+      this.setState({ zoom: this.state.zoom + zoomStep });
+    } else if (type === 'out') {
+      let newZoom = this.state.zoom - zoomStep;
+      if (newZoom < 1) return;
+      else if (newZoom === 1) this.setState({ x: 0, y: 0, zoom: 1 });
+      else this.setState({ zoom: newZoom });
+    } else if (type === 'reset') {
+      this.resetZoom();
     }
   };
   applyRotate = (type) => {
-    switch (type) {
-      case 'cw':
-        this.setState({ rotate: this.state.rotate + 90 });
-        break;
-      case 'acw':
-        this.setState({ rotate: this.state.rotate - 90 });
-        break;
+    if (type === 'cw') {
+      this.setState({ rotate: this.state.rotate + 90 });
+    } else if (type === 'acw') {
+      this.setState({ rotate: this.state.rotate - 90 });
     }
   };
   reset = (e) => {
@@ -138,31 +128,23 @@ export default class Lightbox extends React.Component {
   keyboardNavigation = (e) => {
     let { allowZoom = true, allowReset = true } = this.props;
     let { multi, x, y, zoom } = this.state;
-    switch (e.key) {
-      case 'ArrowLeft':
-        if (multi && zoom === 1) this.navigateImage('prev', e);
-        else if (zoom > 1) this.setState({ x: x - 20 });
-        break;
-      case 'ArrowRight':
-        if (multi && zoom === 1) this.navigateImage('next', e);
-        else if (zoom > 1) this.setState({ x: x + 20 });
-        break;
-      case 'ArrowUp':
-        if (zoom > 1) this.setState({ y: y + 20 });
-        break;
-      case 'ArrowDown':
-        if (zoom > 1) this.setState({ y: y - 20 });
-        break;
-      case '+':
-        if (allowZoom) this.applyZoom('in');
-        break;
-      case '-':
-        if (allowZoom) this.applyZoom('out');
-        break;
-      case 'Escape':
-        if (allowReset && this.shouldShowReset()) this.reset(e);
-        else this.exit(e);
-        break;
+    if (e.key === 'ArrowLeft') {
+      if (multi && zoom === 1) this.navigateImage('prev', e);
+      else if (zoom > 1) this.setState({ x: x - 20 });
+    } else if (e.key === 'ArrowRight') {
+      if (multi && zoom === 1) this.navigateImage('next', e);
+      else if (zoom > 1) this.setState({ x: x + 20 });
+    } else if (e.key === 'ArrowUp') {
+      if (zoom > 1) this.setState({ y: y + 20 });
+    } else if (e.key === 'ArrowDown') {
+      if (zoom > 1) this.setState({ y: y - 20 });
+    } else if (e.key === '+') {
+      if (allowZoom) this.applyZoom('in');
+    } else if (e.key === '-') {
+      if (allowZoom) this.applyZoom('out');
+    } else if (e.key === 'Escape') {
+      if (allowReset && this.shouldShowReset()) this.reset(e);
+      else this.exit(e);
     }
   };
   componentDidMount() {
