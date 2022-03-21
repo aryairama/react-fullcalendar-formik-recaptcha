@@ -4,14 +4,17 @@ export const FilterColumns = [
   {
     Header: () => null, // No header
     id: 'expander', // It needs an ID
-    Cell: ({ row }) => (
-      <div {...row.getToggleRowExpandedProps()} style={{ textAlign: 'center', width: '100%', cursor: 'pointer' }}>
-        {row.isExpanded ? '👇' : '👉'}
-      </div>
-    ),
+    Cell: ({ row, ...col }) => {
+      console.log(col);
+      return (
+        <div {...row.getToggleRowExpandedProps()} style={{ textAlign: 'center', width: '100%', cursor: 'pointer' }}>
+          {row.isExpanded ? '👇' : '👉'}
+        </div>
+      );
+    },
     width: 5,
     maxWidth: 20,
-    expanded: false
+    expanded: false,
   },
   {
     id: 'select row',
@@ -19,7 +22,7 @@ export const FilterColumns = [
     Cell: ({ row }) => <ReactTableCheckbox {...row.getToggleRowSelectedProps()} />,
     width: 5,
     minWidth: 5,
-    expanded: false
+    expanded: false,
   },
   {
     Header: 'ID',
@@ -27,52 +30,52 @@ export const FilterColumns = [
     disableSortBy: true,
     width: 5,
     minWidth: 5,
-    expanded: false
+    expanded: false,
   },
   {
     Header: 'Product Name',
     accessor: 'name',
-    expanded: false
+    expanded: false,
   },
   {
     Header: 'Product Brand',
     accessor: 'brand',
-    expanded: true
+    expanded: true,
   },
   {
     id: 'price1',
     Header: 'Product Price',
     accessor: 'price',
-    expanded: true
+    expanded: true,
   },
   {
     id: 'price2',
     Header: 'Product Price',
     accessor: 'price',
-    expanded: true
+    expanded: true,
   },
   {
     id: 'price3',
     Header: 'Product Price',
     accessor: 'price',
-    expanded: true
+    expanded: true,
   },
   {
     id: 'price4',
     Header: 'Product Price',
     accessor: 'price',
-    expanded: true
+    expanded: true,
   },
   {
     id: 'price5',
     Header: 'Product Price',
     accessor: 'price',
-    expanded: true
+    expanded: true,
   },
   {
     id: 'price6',
     Header: 'Product Price',
     accessor: 'price',
-    expanded: true
+    expanded: true,
   },
 ];
