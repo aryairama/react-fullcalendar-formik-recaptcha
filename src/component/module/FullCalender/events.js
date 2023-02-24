@@ -1,8 +1,8 @@
 const events = [
-  { title: 'All Day Event', start: getDate('YEAR-MONTH-01') },
+  { title: 'All Day Event', start: getDate('YEAR-MONTH-01'), test: 'asasasasas' },
   {
-    title: 'Long Event',
-    start: getDate('YEAR-MONTH-07'),
+    title: 'Long Event Long Event Long EventLong EventLong EventLong EventLong EventLong EventLong Event',
+    start: getDate('YEAR-MONTH-06'),
     end: getDate('YEAR-MONTH-10'),
   },
   {
@@ -18,6 +18,9 @@ const events = [
   { title: 'Birthday Party', start: getDate('YEAR-MONTH-18') },
   { title: 'Meeting', start: getDate('YEAR-MONTH-18') },
   { title: 'Happy Hour', start: getDate('YEAR-MONTH-18') },
+  { title: 'Dinner', start: getDate('YEAR-MONTH-18') },
+  { title: 'Dinner', start: getDate('YEAR-MONTH-18') },
+  { title: 'Dinner', start: getDate('YEAR-MONTH-18') },
   { title: 'Dinner', start: getDate('YEAR-MONTH-18') },
 ];
 

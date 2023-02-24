@@ -74,7 +74,7 @@ const ExampleCalendar = (props) => {
         header={{
           start: 'today',
           center: 'title',
-          end: 'prev,next',
+          end: 'prev,next dayGridMonth,timeGridWeek,timeGridDay',
         }}
         bgColor="green"
         textColor="white"

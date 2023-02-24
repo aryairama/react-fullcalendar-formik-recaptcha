@@ -3,6 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import CustomView from './CustomView';
+
 const FullCalender = ({ schedules, header, initialView, bgColor, textColor, allDay, ...props }) => {
   const setAppreance = (schedules = []) => {
     schedules.forEach((schedule) => {
@@ -16,10 +20,39 @@ const FullCalender = ({ schedules, header, initialView, bgColor, textColor, allD
   return (
     <FullCalendar
       {...props}
+      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       headerToolbar={header}
       initialView={initialView}
-      plugins={[dayGridPlugin]}
       events={setAppreance(schedules)}
+      eventContent={(arg) => {
+        console.log(arg);
+        return (
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'column',
+              flexWrap: 'wrap',
+              padding: '20px',
+            }}
+          >
+            <div
+              style={{
+                width: '50%',
+              }}
+            >
+              Lorem ipsum, dolor sit amet
+            </div>
+            <div
+              style={{
+                width: '50%',
+              }}
+            >
+              Lorem ipsum, dolor sit amet
+            </div>
+          </div>
+        );
+      }}
     />
   );
 };
@@ -37,7 +70,7 @@ FullCalender.propTypes = {
   initialView: PropTypes.string.isRequired,
   bgColor: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,
-  allDay: PropTypes.bool
+  allDay: PropTypes.bool,
 };
 
 export default FullCalender;

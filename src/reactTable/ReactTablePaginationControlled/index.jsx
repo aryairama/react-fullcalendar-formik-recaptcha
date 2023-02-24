@@ -25,7 +25,7 @@ const Index = () => {
     // pageCount,
     // pageOptions,
     setPageSize,
-    // selectedFlatRows,
+    selectedFlatRows,
     allColumns,
     getToggleHideAllColumnsProps,
   } = useTable(
@@ -176,6 +176,7 @@ const Index = () => {
       </div>
       <pre>
         <code>{JSON.stringify({ selectedRows: selectedRowIds }, null, 2)}</code>
+        <code>{JSON.stringify({ selectedRows: selectedFlatRows.map((rows) => rows.original) }, null, 2)}</code>
       </pre>
     </>
   );
